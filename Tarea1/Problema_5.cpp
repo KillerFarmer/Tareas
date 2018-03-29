@@ -315,6 +315,7 @@ public:
             return 0;
         }
         int min;
+        
 
         if(node == root){
 
@@ -354,20 +355,38 @@ public:
                 }
             }
             */
-
-            while(node != nullptr && node->p->right == node){
+            
+            while(node->p != nullptr  && node->p->right == node){
                 rightSon = node;
                 node = node->p;
             }
 
+            std::cout << "Status: " << node->value << std::endl;
+
+            if(node->p == nullptr){
+                std::cout << value << " doesn't have succesor" << std::endl;
+                min = -99999;
+            } else {
+                min = node->p->value;
+            }
+            /*
             if(node == nullptr){
+                
                 std::cout << value << " doesn't have succesor" << std::endl;
                 return -99999;
                 //min = -99999;
 
             } else{
-                min = node->p->value;
+
+                if(node->p == nullptr){
+                    
+                } else{
+                    min = node->p->value;
+                }
+                
             } 
+            */
+
         }
 
         return min;
@@ -444,6 +463,10 @@ int main(){
     tree.InsertValue(11);
     tree.InsertValue(20);
     tree.InsertValue(6);
+
+    std::cout << "--------------" << std::endl;
+    tree.PrintByLevel();
+    std::cout << "--------------" << std::endl;
 
     std::cout << "The succesor of 6 is " << tree.Succesor(6) << std::endl;
     std::cout << "The succesor of 8 is " << tree.Succesor(8) << std::endl;
