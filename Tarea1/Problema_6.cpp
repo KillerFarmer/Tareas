@@ -400,6 +400,13 @@ void CommonAncestor(BinaryTree& tree, int a, int b){
 
         if((nodeA->value <= node->value && nodeB->value > node->value) || 
             (nodeB->value <= node->value && nodeA->value > node->value)){
+                //
+                if(node->p != nullptr){
+                    std::cout << node->p->value << " is the common ancestor of <" << nodeA->value << "> and <" << nodeB->value << "> \n";
+                    break;
+                }
+                //
+
              std::cout << node->value << " is the common ancestor of <" << nodeA->value << "> and <" << nodeB->value << "> \n";
             break;
         }
@@ -411,7 +418,7 @@ void CommonAncestor(BinaryTree& tree, int a, int b){
                 break;
             }
 
-            std::cout << nodeA->value << " is the most old ancestor of " << nodeB->value << std::endl;
+            std::cout << nodeA->value << " is the oldest ancestor of " << nodeB->value << std::endl;
 
         } else if(node == nodeB){
 
@@ -420,7 +427,7 @@ void CommonAncestor(BinaryTree& tree, int a, int b){
                 break;
             }
 
-            std::cout << nodeB->value << " is the most old ancestor of " << nodeA->value << std::endl;
+            std::cout << nodeB->value << " is the oldest ancestor of " << nodeA->value << std::endl;
         }
 
         before = node;
@@ -457,18 +464,66 @@ int main(){
     tree.PrintByLevel();
     std::cout << "----------" << std::endl;
 
-    /*
-    std::cout << "6 :" << tree.GethDepth(tree.GetNode(6)) << std::endl;
-    std::cout << "8 :" << tree.GethDepth(tree.GetNode(8)) << std::endl;
-    std::cout << "9 :" << tree.GethDepth(tree.GetNode(9)) << std::endl;
-    std::cout << "10 :" << tree.GethDepth(tree.GetNode(10)) << std::endl;
-    */
-
     CommonAncestor(tree, 6, 9);
     CommonAncestor(tree, 8, 12);
     CommonAncestor(tree, 6, 20);
     CommonAncestor(tree, 9, 11);
     CommonAncestor(tree, 6, 10);
+
+
+    BinaryTree tree2(50);
+
+
+    tree2.InsertValue(40);
+    tree2.InsertValue(30);
+    tree2.InsertValue(20);
+    tree2.InsertValue(10);
+    tree2.InsertValue(0);
+
+    std::cout << "----------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "----------" << std::endl;
+
+    CommonAncestor(tree2,0,10);
+    CommonAncestor(tree2,0,20);
+    CommonAncestor(tree2,0,30);
+    CommonAncestor(tree2,0,40);
+    CommonAncestor(tree2,0,50);
+
+
+
+    tree2.InsertValue(60);
+    tree2.InsertValue(70);
+    tree2.InsertValue(80);
+    tree2.InsertValue(90);
+    tree2.InsertValue(100);
+
+    tree2.InsertValue(45);
+    tree2.InsertValue(55);
+    tree2.InsertValue(35);
+    tree2.InsertValue(65);
+
+    std::cout << "----------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "----------" << std::endl;
+
+    
+    CommonAncestor(tree2,20,100);
+    CommonAncestor(tree2,60,100);
+    CommonAncestor(tree2,70,100);
+    CommonAncestor(tree2,80,100);
+    CommonAncestor(tree2,90,100);
+    
+
+    CommonAncestor(tree2,0,100);
+    CommonAncestor(tree2,10,90);
+    CommonAncestor(tree2,20,80);
+    CommonAncestor(tree2,30,70);
+    CommonAncestor(tree2,30,60);
+
+    CommonAncestor(tree2, 30, 45);
+    CommonAncestor(tree2, 65, 100);
+    CommonAncestor(tree2, 55, 70);
 
 
 }
