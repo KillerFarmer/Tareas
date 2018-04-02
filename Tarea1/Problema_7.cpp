@@ -444,6 +444,11 @@ static void SubTree(BinaryTree& T, BinaryTree t){
 
     // Tronara con valores repetidos
     Node* root = T.GetNode(t.Root()->value);
+
+    if(t.Root() == nullptr){
+         std::cout << "T_2 is a subTree of T_1" << std::endl;
+         return;
+    }
     
     bool isSub = CompareByLevel(root, t.Root());
 
@@ -489,6 +494,7 @@ static bool CompareByLevel(Node* T, Node* t){
 
 int main(){
 
+    /*
     BinaryTree tree(10);
 
     tree.InsertValue(8);
@@ -503,17 +509,43 @@ int main(){
     t2.InsertValue(6);
     t2.InsertValue(12);
     t2.InsertValue(21);
+    */
 
-    SubTree(tree, t2);
+    //SubTree(tree, t2);
+
+    BinaryTree t1(50);
+    t1.InsertValue(40);
+    t1.InsertValue(30);
+    t1.InsertValue(20);
+    t1.InsertValue(10);
+    t1.InsertValue(0);
+    t1.InsertValue(60);
+    t1.InsertValue(70);
+    t1.InsertValue(80);
+    t1.InsertValue(90);
+    t1.InsertValue(100);
+    t1.InsertValue(45);
+    t1.InsertValue(55);
+    t1.InsertValue(35);
+    t1.InsertValue(65);
 
     std::cout << "----------" << std::endl;
-    tree.PrintByLevel();
+    t1.PrintByLevel();
     std::cout << "----------" << std::endl;
+
+    BinaryTree t2(60);
+    t2.InsertValue(70);
+    t2.InsertValue(80);
+    t2.InsertValue(90);
+    t2.InsertValue(100);
+    t2.InsertValue(110);
+
+    
 
     std::cout << "----------" << std::endl;
     t2.PrintByLevel();
     std::cout << "----------" << std::endl;
     
-
+    SubTree(t1, t2);
 
 }
