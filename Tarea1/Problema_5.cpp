@@ -320,7 +320,8 @@ public:
         if(node == root){
 
             if(node->right == nullptr){
-                min = value;
+                min = -99999;
+                std::cout << node->value << " doens't have successor" << std::endl;
 
             } else{
                 min = SearchMinimum(node->right);
@@ -360,8 +361,6 @@ public:
                 rightSon = node;
                 node = node->p;
             }
-
-            std::cout << "Status: " << node->value << std::endl;
 
             if(node->p == nullptr){
                 std::cout << value << " doesn't have succesor" << std::endl;
@@ -455,8 +454,6 @@ int main(){
 
     BinaryTree tree(10);
 
-    
-
     tree.InsertValue(8);
     tree.InsertValue(12);
     tree.InsertValue(9);
@@ -476,9 +473,61 @@ int main(){
     std::cout << "The succesor of 12 is " << tree.Succesor(12) << std::endl;
     std::cout << "The succesor of 20 is " << tree.Succesor(20) << std::endl;
 
+
+    
+
+    BinaryTree tree2(50);
+
+    tree2.InsertValue(40);
+    tree2.InsertValue(30);
+    tree2.InsertValue(20);
+    tree2.InsertValue(10);
+    tree2.InsertValue(0);
+
+    std::cout << "--------------" << std::endl;
+    tree2.PrintByLevel(); 
+    std::cout << "--------------" << std::endl;
+
+    for(int v : {0, 10, 20, 30, 40, 50}){
+        std::cout << "The succesor of " << v << " is " <<tree2.Succesor(v) << std::endl;;
+    }
+
+
+    tree2.InsertValue(60);
+    tree2.InsertValue(70);
+    tree2.InsertValue(80);
+    tree2.InsertValue(90);
+    tree2.InsertValue(100);
+
+    std::cout << "--------------" << std::endl;
+    tree2.PrintByLevel(); 
+    std::cout << "--------------" << std::endl;
+
+    for(int v : {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}){
+        std::cout << "The succesor of " << v << " is " <<tree2.Succesor(v) << std::endl;;
+    }
+
+
+    tree2.InsertValue(45);
+    tree2.InsertValue(55);
+    tree2.InsertValue(35);
+    tree2.InsertValue(65);
+    tree2.InsertValue(99);
+
+    std::cout << "--------------" << std::endl;
+    tree2.PrintByLevel(); 
+    std::cout << "--------------" << std::endl;
+
+    for(int v : {0, 10, 20, 30, 35, 40, 45, 50, 55, 60, 65, 70, 80, 90, 99, 100}){
+        std::cout << "The succesor of " << v << " is " <<tree2.Succesor(v) << std::endl;;
+    }
+
+    
+
+
     std::cout << std::endl;
 
-    tree.PrintByLevel();
+    //tree.PrintByLevel();
     
 
     

@@ -235,6 +235,43 @@ int main(){
     tree.PrintByLevel();
     std::cout << "------------" << std::endl;
 
+
+
+    BinaryTree tree2(50);
+
+    std::cout << "------------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "------------" << std::endl;
+
+    tree2.InsertValue(40);
+    tree2.InsertValue(30);
+    tree2.InsertValue(20);
+    tree2.InsertValue(10);
+
+    std::cout << "------------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "------------" << std::endl;
+
+    tree2.InsertValue(60);
+    tree2.InsertValue(70);
+    tree2.InsertValue(80);
+    tree2.InsertValue(90);
+
+    std::cout << "------------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "------------" << std::endl;
+
+    tree2.InsertValue(45);
+    tree2.InsertValue(55);
+    tree2.InsertValue(61);
+    tree2.InsertValue(39);
+
+    std::cout << "------------" << std::endl;
+    tree2.PrintByLevel();
+    std::cout << "------------" << std::endl;
+
+
+
     LinkedList list(1);
     list.InsertValue(2);
     list.InsertValue(3);
