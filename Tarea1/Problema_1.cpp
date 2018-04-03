@@ -25,6 +25,71 @@ struct Node{
 
 };
 
+
+class LinkedList{
+
+private:
+    Node* root;
+    int size;
+
+public:
+
+    LinkedList(int value):
+        root(new Node(value)), size(1){
+        
+    }
+    
+    LinkedList():
+        root(nullptr), size(0){
+
+    }
+
+    void InsertValue(int value){
+
+        if(root == nullptr){
+            root = new Node(value);
+            size++;
+            return;
+        }
+
+        Node* last = root;
+
+        while(last->right != nullptr){
+
+            last = last->right;
+        }
+
+        last->right = new Node(nullptr, last, nullptr, value);
+        size++;
+    }
+
+
+    int Size(){
+        return size;
+
+    }
+
+    void Print(){
+
+        std::vector<int> values;
+        values.reserve(size);
+    
+        Node* move = root;
+
+        while(move != nullptr){
+            values.push_back(move->value);
+            move = move->right;
+        }
+
+        for(int i = 0; i < size; i++){
+            std::cout << values[i] << " ";
+        }
+        std::cout << std::endl;
+
+    }
+
+};
+
 class AVLTree{
 
 private:
@@ -40,6 +105,7 @@ public:
 
         if (root == nullptr){
             root = new Node(value);
+            return;
         }
 
         Node* before = nullptr;
@@ -67,12 +133,15 @@ public:
             check = before->right;
         }
 
-        
+        check = check->p;
+
         while(check != nullptr){
             
             int l = GetHeight(check->left);
             int r = GetHeight(check->right);
             int bal = r - l;
+
+            bal = CheckingBalance(check);
 
             if(bal < -1 || bal > 1){
 
@@ -97,6 +166,8 @@ public:
                     }
                 }
 
+                break;
+
 
 
             }
@@ -106,7 +177,45 @@ public:
 
     }
 
+    void PrintByLevel(){
+
+        std::vector<LinkedList> levels;
+
+        if(root == nullptr){
+            std::cout << "The tree is empty" << std::endl;
+            return;
+        }
+
+        levels.push_back(LinkedList(root->value));
+
+        SearchByLevel(levels, root->left, 1);
+        SearchByLevel(levels, root->right, 1);
+        std::cout << "Lel" << std::endl;
+        for(int i = 0; i < levels.size(); i++){
+            levels[i].Print();
+        }
+    }
+
 private:
+    // size_type: Importante
+    void SearchByLevel(std::vector<LinkedList>& levels, Node* node, size_t depth){
+
+        
+        if(node != nullptr){
+            
+            if(depth + 1 > levels.size()){
+                //levels.push_back(new LinkedList());
+                
+                levels.push_back(LinkedList());
+            }
+
+            levels[depth].InsertValue(node->value);
+
+            SearchByLevel(levels, node->left, depth + 1);
+            SearchByLevel(levels, node->right, depth + 1);
+
+        }
+    }
 
     int GetHeight(Node* node){
 
@@ -135,26 +244,26 @@ private:
         }
 
         Node* temp = node->left->right;
-        Node* p = node->p;
-        Node* left = node->left;
+        Node* P = node->p;
+        //Node* Left = node->left;
 
 
-        if(p != nullptr){
+        if(P != nullptr){
 
             bool dir = false;
 
-            if(node == p->right){
+            if(node == P->right){
                 dir = true;
             }
 
             if(dir){
-                p->right = node->left;
+                P->right = node->left;
             } else{
-                p->left = node->left;
+                P->left = node->left;
             }
         }
 
-        node->left->p = p;
+        node->left->p = P;
         node->left->right = node;
         node->p = node->left;
         node->left = temp;
@@ -171,25 +280,25 @@ private:
         }
 
         Node* temp = node->right->left;
-        Node* p = node->p;
-        Node* right = node->right;
+        Node* P = node->p;
+        //Node* Right = node->right;
 
 
-        if(p != nullptr){
+        if(P != nullptr){
             bool dir = false;
 
-            if(node == node->right){
+            if(node == P->right){
                 dir = true;
             }
 
             if(dir){
-                p->right = node->right;
+                P->right = node->right;
             } else{
-                p->left = node->right;
+                P->left = node->right;
             }
         }
 
-        node->right->p = p;
+        node->right->p = P;
         node->right->left = node;
         node->p = node->right;
         node->right = temp;
@@ -215,7 +324,46 @@ private:
         
         return r - l;
 
+
        
     }
 
 };
+
+
+
+int main(){
+
+
+    AVLTree tree(100);
+
+    /*
+	tree.InsertValue(2);
+	tree.InsertValue(4);
+    tree.InsertValue(5);
+    tree.InsertValue(6);
+    tree.InsertValue(7);
+    tree.InsertValue(8);
+    tree.InsertValue(9);
+    */
+
+
+    std::vector<int> list = {29,71,82,48,39,101,22,46, 17,3,20,25,10};
+
+    for(int x : list){
+        tree.InsertValue(x);
+    }
+
+    std::cout << "---------------" << std::endl;
+    tree.PrintByLevel();
+    std::cout << "---------------" << std::endl;
+
+    AVLTree tree2(1);
+
+    for(int x: {2, 3, 4, 5, 6}){
+        tree2.InsertValue(x);
+    }
+
+    tree2.PrintByLevel();
+	std::cin.get();
+}
